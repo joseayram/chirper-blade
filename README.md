@@ -9,3 +9,4 @@
 - Change DB_CONNECTION constant to sqlite
 - Create database file: touch database/database.sqlite
 - Remove DB_DATABASE constant from .env file
+- php artisan migrate

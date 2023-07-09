@@ -21,14 +21,6 @@ class ChirpController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -40,14 +32,6 @@ class ChirpController extends Controller
         $request->user()->chirps()->create($validated);
 
         return redirect(route('chirps.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Chirp $chirp)
-    {
-        //
     }
 
     /**
@@ -82,8 +66,12 @@ class ChirpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chirp $chirp)
+    public function destroy(Chirp $chirp): RedirectResponse
     {
-        //
+        $this->authorize('delete', $chirp);
+
+        $chirp->delete();
+
+        return redirect(route('chirps.index'));
     }
 }
